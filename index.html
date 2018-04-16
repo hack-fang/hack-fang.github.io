@@ -262,6 +262,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/gitlab服务器搭建和部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KaiFang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/gitlab服务器搭建和部署/" itemprop="url">gitlab服务器搭建和部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T15:11:44+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/动手实战/" itemprop="url" rel="index">
+                    <span itemprop="name">动手实战</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>GitLab是一个基于 Web 的 Git 仓库管理工具，且具有wiki 和 issue 跟踪功能。GitLab 由 GitLab Inc. 开发，使用开源许可证。GitLab 由乌克兰程序员 Dmitriy Zaporozhets 和 Valery Sizov 开发。它由 Ruby 写成。后来，一些部分用Go语言重写。截止2016年12月，该公司有150名团队成员，以及1400多名开源贡献者。 GitLab被 IBM，Sony，Jülich Research Center，NASA，Alibaba，Invincea，O’Reilly Media，Leibniz-Rechenzentrum (LRZ)，CERN，SpaceX 等组织使用。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/gitlab服务器搭建和部署/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/15/ubuntu 16.04 server 安装和部署/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -354,53 +501,15 @@
 
       
         
-          
-            <h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="安装ubuntu-16-04-server的过程，留作备份"><a href="#安装ubuntu-16-04-server的过程，留作备份" class="headerlink" title="安装ubuntu 16.04 server的过程，留作备份"></a>安装ubuntu 16.04 server的过程，留作备份</h2><h2 id="一、ubuntu-server-16-04-LTS-系统安装"><a href="#一、ubuntu-server-16-04-LTS-系统安装" class="headerlink" title="一、ubuntu server 16.04 LTS 系统安装"></a>一、ubuntu server 16.04 LTS 系统安装</h2><ol>
-<li>首先是刻录镜像到u盘这个暂且不说，教程很多。推荐用软碟通去刻录到u盘中，然后重启电脑，选择u盘启动即可进入安装界面</li>
-<li>出现<font color="red">语言</font>语言选择界面，我们选择<font color="red">English </font>,回车进入下一步</li>
-<li>默认选择第一项:<font color="red">Install Ubuntu Server</font>，回车再弹出界面中选择<font color="red">时区</font> –&gt; Hong Kong </li>
-<li>选择<font color="red">键盘布局所属国家(keyboard)</font> –&gt; English（US），等待预加载完毕</li>
-<li>选择<font color="red">网络配置(network）</font>–&gt; 默认回车即可</li>
-<li>设置<font color="red">主机名(hostname)</font> –&gt; 自由设置，默认为ubutnu</li>
-<li>设置<font color="red">用户名(username)</font> –&gt; 自由设置，作为登录使用</li>
-<li>设置<font color="red">密码设置(password)</font> –&gt; 自由设置，可不填写</li>
-<li>选择<font color="red">是否加密home目录(encrypt home directory)</font> –&gt; No</li>
-<li>选择<font color="red">时区是否正确</font> –&gt; 正确选Yes，不正确选No手动选择 </li>
-<li>设置<font color="red">磁盘分区(parition disks)</font> –&gt; Manual</li>
-<li>选择<font color="red">磁盘</font> –&gt; 选要选择的磁盘以SCSI开头</li>
-<li>选择<font color="red">新建一个空白分区表(create a new empty parition table on this device)</font> –&gt; Yes,选择磁盘空闲空间<font color="red">FREE SPACE    </font></li>
-<li>选择<font color="red">新建分区(create a new partition)</font> –&gt; 输入空间大小<font color="red">new partition size</font> –&gt; 选择<font color="red">Primary</font> –&gt; 选择<font color="red">头部建立(Biginning)</font> –&gt; 设置资料系统<font color="red">file system</font> –&gt; 设置挂载点<font color="red">Mount point</font> –&gt;点击分区设定完毕<font color="red">Done seeting up the partition</font>,反复三次，分别建立以下3个分区<br>| 挂载点名称 | 文件格式 | 空间大小 |<br>|  ——  |  —– |——– |<br>| /boot    | ext4   | 400MB   |<br>| /swap    | swap   | 内存大小的1.5-2倍 |<br>| /        | ext4   | max   |</li>
-<li>选择结束分区并写入磁盘</li>
-<li>设置网络代理<font color="red">HTTP proxy</font> –&gt; Continue</li>
-<li>设置不自动更新<font color="red">No automatic update</font></li>
-<li>选择需要安装的软件<font color="red">Choose software to install</font> –&gt; 空格为选定</li>
-<li>安装<font color="red">GRUB boot loader</font> –&gt; yes</li>
-<li>完成安装重启</li>
-</ol>
-<h2 id="二、-安装完成后的一些配置"><a href="#二、-安装完成后的一些配置" class="headerlink" title="二、 安装完成后的一些配置"></a>二、 安装完成后的一些配置</h2><ol>
-<li>登录系统，输入设置好的username 和 password</li>
-<li><p>启用root账号来提升权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看当前网络状态，默认网卡为en开头那块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编辑配置网络，服务器需要固定其ip来让外部用户使用，位于/etc/network下，文件名为interface</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/network/interfaces.d</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改The primary network interface 下的内容保存后推出</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto 网卡名</span><br><span class="line">iface 网卡名 inet static # 设置为静态ip</span><br><span class="line">address 固定ip地址       # 静态ip，可根据ifconfig中获取到的ip地址信息写</span><br><span class="line">netmask <span class="number">255.255</span>.<span class="number">255.0</span>   # 子网掩码，可根据ifconfig信息</span><br><span class="line">gateway 网关            # 网关，可根据ifconfig信息</span><br><span class="line">dns-nameserver <span class="number">8.8</span>.<span class="number">8.8</span>  # 设置dns</span><br><span class="line">dns-nameserver <span class="number">114.114</span>.<span class="number">114.114</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启网络，应用配置，若未生效，则需要重启服务器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service networking restart</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="三、更新"><a href="#三、更新" class="headerlink" title="三、更新"></a>三、更新</h2><p>正式使用之前需要更新软件源和软件包，可能需要root权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get update</span><br><span class="line">$ apt-get upgrade</span><br></pre></td></tr></table></figure></p>
-<p>更换软件源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure></p>
-<p>先注释默认的，再选择最合适的软件源，</p>
-<p>更多的软件源: <a href="http://www.cnblogs.com/dtiove/p/5917263.html" target="_blank" rel="noopener">软件源</a></p>
-
-          
+          <h2 id=""><a href="#" class="headerlink" title=""></a></h2><blockquote>
+<p>Ubuntu 是基于Debian GNU/Linux，分为桌面版和服务器版，Ubuntu每六个月便会发布一个新版，以便人们实时地获取和使用新软件。Ubuntu共有五个长期支持版本(Long Term Support，LTS)：Ubuntu 6.06、8.04、10.04、12.04、14.04、16.04。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/15/ubuntu 16.04 server 安装和部署/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -480,7 +589,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -502,7 +611,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
