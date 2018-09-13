@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ubuntu,web," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Transimisson 是一款老牌的开源PT/BT下载器，适用于Linux系统，Windows或者MAC OS推荐使用uTorrent去下载。">
+<meta name="keywords" content="ubuntu,web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transmission WEB 配置">
+<meta property="og:url" content="http://yoursite.com/2018/09/13/Transmission-WEB-配置/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Transimisson 是一款老牌的开源PT/BT下载器，适用于Linux系统，Windows或者MAC OS推荐使用uTorrent去下载。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-13T03:27:38.331Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Transmission WEB 配置">
+<meta name="twitter:description" content="Transimisson 是一款老牌的开源PT/BT下载器，适用于Linux系统，Windows或者MAC OS推荐使用uTorrent去下载。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/13/Transmission-WEB-配置/"/>
+
+
+
+
+
+  <title>Transmission WEB 配置 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/Transmission-WEB-配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KaiFang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Transmission WEB 配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-13T09:44:51+08:00">
+                2018-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/动手实战/" itemprop="url" rel="index">
+                    <span itemprop="name">动手实战</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<blockquote>
+<p>Transimisson 是一款老牌的开源PT/BT下载器，适用于Linux系统，Windows或者MAC OS推荐使用uTorrent去下载。<br><a id="more"></a></p>
+</blockquote>
+<p>此篇记录了在教育网IPV6环境下配置远程PT下载机的过程</p>
+<hr>
+<h1 id="Ubuntu-下-Transmission-WEB-安装、配置和美化"><a href="#Ubuntu-下-Transmission-WEB-安装、配置和美化" class="headerlink" title="Ubuntu 下 Transmission WEB 安装、配置和美化"></a>Ubuntu 下 Transmission WEB 安装、配置和美化</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>这是一个大坑，本来是用的Ubuntu自带的Transimisson去下载，结果发现下载没有速度，查阅资料后发现是因为版本过旧的原因，更换源后重新下载问题解决。</p>
+<h3 id="更换PPA"><a href="#更换PPA" class="headerlink" title="更换PPA"></a>更换PPA</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:transmissionbt/ppa</span><br></pre></td></tr></table></figure>
+<h3 id="更新源"><a href="#更新源" class="headerlink" title="更新源"></a>更新源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<h3 id="安装Transmission"><a href="#安装Transmission" class="headerlink" title="安装Transmission"></a>安装Transmission</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 因为服务器版本不需要界面，故只需要安装daemon版本即可</span></span><br><span class="line">sudo apt-get install transmission-daemon</span><br></pre></td></tr></table></figure>
+<h3 id="至此安装部分结束，接下来是配置部分"><a href="#至此安装部分结束，接下来是配置部分" class="headerlink" title="至此安装部分结束，接下来是配置部分"></a>至此安装部分结束，接下来是配置部分</h3><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="启用和停止Transmission的命令"><a href="#启用和停止Transmission的命令" class="headerlink" title="启用和停止Transmission的命令"></a>启用和停止Transmission的命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 停止,每次修改配置文件前一定要停止</span></span><br><span class="line">sudo service transmission-daemon stop</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">sudo service transmission-daemon start</span><br></pre></td></tr></table></figure>
+<h3 id="编辑配置文件之前先停止Tranmission服务"><a href="#编辑配置文件之前先停止Tranmission服务" class="headerlink" title="编辑配置文件之前先停止Tranmission服务"></a>编辑配置文件之前先停止Tranmission服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service transmission-daemon stop</span><br></pre></td></tr></table></figure>
+<h3 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/transmission-daemon/settings.json</span><br></pre></td></tr></table></figure>
+<h3 id="修改参数（附上自用的完整参数及说明）"><a href="#修改参数（附上自用的完整参数及说明）" class="headerlink" title="修改参数（附上自用的完整参数及说明）"></a>修改参数（附上自用的完整参数及说明）</h3><h4 id="对PT来说一些重要的设置项-一定要把PEX、LDP和DHT关掉，否则有封号的风险！"><a href="#对PT来说一些重要的设置项-一定要把PEX、LDP和DHT关掉，否则有封号的风险！" class="headerlink" title="对PT来说一些重要的设置项,一定要把PEX、LDP和DHT关掉，否则有封号的风险！"></a>对PT来说一些重要的设置项,一定要把PEX、LDP和DHT关掉，否则有封号的风险！</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"dht-enabled"</span>: <span class="literal">false</span>, <span class="comment"># 关闭DHT</span></span><br><span class="line"><span class="string">"lpd-enabled"</span>: <span class="literal">false</span>, <span class="comment"># 禁用LDP</span></span><br><span class="line"><span class="string">"pex-enabled"</span>: <span class="literal">false</span>,  <span class="comment">#禁用PEX</span></span><br><span class="line"><span class="string">"/home/transmission/downloads"</span>,<span class="comment">#### 自定义下载目录,修改完一定要更新权限！</span></span><br></pre></td></tr></table></figure>
+<h4 id="完整的设置项"><a href="#完整的设置项" class="headerlink" title="完整的设置项"></a>完整的设置项</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "alt-speed-down": 50,           # 计划时段下载限速值</span><br><span class="line">    "alt-speed-enabled": false,     # 计划时段限速启用(默认关闭)</span><br><span class="line">    "alt-speed-time-begin": 540,    # 计划时段开始时间</span><br><span class="line">    "alt-speed-time-day": 127,      # 计划时段天数</span><br><span class="line">    "alt-speed-time-enabled": false,# 启用计划工作(默认关闭)</span><br><span class="line">    "alt-speed-time-end": 1020,     # 计划时段结束时间</span><br><span class="line">    "alt-speed-up": 50,             # 计划时段上传限速</span><br><span class="line">    "bind-address-ipv4": "0.0.0.0", # 绑定IPV4地址并暴露出去</span><br><span class="line">    "bind-address-ipv6": "::",      # 绑定IPV6地址并暴露出去</span><br><span class="line">    "blocklist-enabled": false,     # 启用黑名单(关闭)</span><br><span class="line">    "blocklist-url": "http://www.example.com/blocklist",</span><br><span class="line">    "cache-size-mb": 4,             # 缓存大小，以MB为单位，建议设大一些，为内存1/6～1/4</span><br><span class="line">    "dht-enabled": false,           #### 玩PT一定要关闭,BT开启效果更好</span><br><span class="line">    "download-dir": "/home/transmission/downloads",#### 自定义下载目录</span><br><span class="line">    "download-limit": 100,          ## 同时下载</span><br><span class="line">    "download-limit-enabled": 0,</span><br><span class="line">    "download-queue-enabled": true, ## 下载队列限制</span><br><span class="line">    "download-queue-size": 5,       ## 最大同时下载数</span><br><span class="line">    "encryption": 0,                # 0=不加密，1=优先加密，2=必须加密</span><br><span class="line">    "idle-seeding-limit": 30,</span><br><span class="line">    "idle-seeding-limit-enabled": false,</span><br><span class="line">    "incomplete-dir": "/home/transmission/tmp",## 未完成现在目录</span><br><span class="line">    "incomplete-dir-enabled": false,</span><br><span class="line">    "lpd-enabled": false,           ### 禁用LDP（本地节点发现，用于在本地网络寻找节点）,PT关闭</span><br><span class="line">    "max-peers-global": 2000,</span><br><span class="line">    "message-level": 1,</span><br><span class="line">    "peer-congestion-algorithm": "",</span><br><span class="line">    "peer-id-ttl-hours": 6,</span><br><span class="line">    "peer-limit-global": 2000,     ## 全局连接数</span><br><span class="line">    "peer-limit-per-torrent": 999, ## 每个种子最多的连接数</span><br><span class="line">    "peer-port": 51413,            ## 程序端口，保持默认即可</span><br><span class="line">    "peer-port-random-high": 65535,</span><br><span class="line">    "peer-port-random-low": 49152,</span><br><span class="line">    "peer-port-random-on-start": false,#不建议改为true</span><br><span class="line">    "peer-socket-tos": "default",</span><br><span class="line">    "pex-enabled": false,          ### #禁用PEX（节点交换，用于同已与您相连接的节点交换节点名单）,PT关闭</span><br><span class="line">    "port-forwarding-enabled": true, ## 端口转发</span><br><span class="line">    "preallocation": 1, #预分配文件磁盘空间，0=关闭，1=快速，2=完全。建议取1开启该功能，防止下载大半了才发现磁盘不够。取2时，可以减少磁盘碎片，但速度较慢。</span><br><span class="line">    "prefetch-enabled": true,</span><br><span class="line">    "queue-stalled-enabled": true,</span><br><span class="line">    "queue-stalled-minutes": 99999,</span><br><span class="line">    "ratio-limit": 2,</span><br><span class="line">    "ratio-limit-enabled": false,</span><br><span class="line">    "rename-partial-files": true,</span><br><span class="line">    "rpc-authentication-required": true, ### 远程电脑登陆验证（授权），默认为false，不需用户名和密码就能登陆web-ui</span><br><span class="line">    "rpc-bind-address": "0.0.0.0",</span><br><span class="line">    "rpc-enabled": true,      ### 启用RPC服务</span><br><span class="line">    "rpc-host-whitelist": "", ### 域名白名单</span><br><span class="line">    "rpc-host-whitelist-enabled": true, ### 启用域名白名单</span><br><span class="line">    "rpc-password": "&#123;433f71612cef6ac4a2a635f22d2fcc33b370d2b908HqhE2c",### web-ui的密码，可直接修改，重新运行或者reload服务的时候会自动被加密</span><br><span class="line">    "rpc-port": 9091, ### web-ui端口</span><br><span class="line">    "rpc-url": "/transmission/",</span><br><span class="line">    "rpc-username": "transmission",### 远程电脑登入web-ui的用户名称</span><br><span class="line">    "rpc-whitelist": "127.0.0.1", ### 允许远程连接控制的电脑IP地址白名单，如果只允许局域网内电脑控制的话可以用“192.168.*.* ”</span><br><span class="line">    "rpc-whitelist-enabled": false,</span><br><span class="line">    "scrape-paused-torrents-enabled": true,</span><br><span class="line">    "script-torrent-done-enabled": false,</span><br><span class="line">    "script-torrent-done-filename": "",</span><br><span class="line">    "seed-queue-enabled": true,</span><br><span class="line">    "seed-queue-size": 100,</span><br><span class="line">    "speed-limit-down": 100000, # 平时的下载限速</span><br><span class="line">    "speed-limit-down-enabled": true,# 启用平时下载限速</span><br><span class="line">    "speed-limit-up": 100000,   # 平时上传限速</span><br><span class="line">    "speed-limit-up-enabled": true,# 启用平时上传限速</span><br><span class="line">    "start-added-torrents": true,</span><br><span class="line">    "trash-original-torrent-files": false,</span><br><span class="line">    "umask": 0, ### 默认18，这会让下载回来的文件目录的权限为0755，而改成0可以把权限改成0777，这样就方便了通过局域网电脑对文件目录的全权控制</span><br><span class="line">    "upload-limit": 100,</span><br><span class="line">    "upload-limit-enabled": 0,</span><br><span class="line">    "upload-slots-per-torrent": 20,</span><br><span class="line">    "utp-enabled": true#### PT启用μTP协议</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><h3 id="因为我们修改了默认的下载路径，而那个目录，默认安装的transmission是没有读写权限的，而且安装的transmission的用户组是debian-transmission。"><a href="#因为我们修改了默认的下载路径，而那个目录，默认安装的transmission是没有读写权限的，而且安装的transmission的用户组是debian-transmission。" class="headerlink" title="因为我们修改了默认的下载路径，而那个目录，默认安装的transmission是没有读写权限的，而且安装的transmission的用户组是debian-transmission。"></a>因为我们修改了默认的下载路径，而那个目录，默认安装的transmission是没有读写权限的，而且安装的transmission的用户组是debian-transmission。</h3><h4 id="切换到HOME目录，执行"><a href="#切换到HOME目录，执行" class="headerlink" title="切换到HOME目录，执行"></a>切换到HOME目录，执行</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -a -G debian-transmission root</span><br><span class="line"><span class="comment"># 给修改的文件夹赋予用户</span></span><br><span class="line">sudo chgrp -R debian-transmission ./transmission/</span><br></pre></td></tr></table></figure>
+<h4 id="修改777权限"><a href="#修改777权限" class="headerlink" title="修改777权限"></a>修改777权限</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R 777 ./transmission</span><br><span class="line"><span class="built_in">cd</span> transmission</span><br><span class="line">sudo chmod -R 777 ./downloads</span><br></pre></td></tr></table></figure>
+<h2 id="UI美化"><a href="#UI美化" class="headerlink" title="UI美化"></a>UI美化</h2><p>因为原版的UI很丑陋，使用大神开发的新版UI，<a href="https://github.com/ronggang/transmission-web-control" target="_blank" rel="noopener">GitHub地址</a></p>
+<h3 id="根据操作提示安装即可-教程"><a href="#根据操作提示安装即可-教程" class="headerlink" title="根据操作提示安装即可,教程"></a>根据操作提示安装即可,<a href="https://github.com/ronggang/transmission-web-control/wiki/Linux-Installation-CN" target="_blank" rel="noopener">教程</a></h3><h3 id="安装完毕后，重新启动transmission服务"><a href="#安装完毕后，重新启动transmission服务" class="headerlink" title="安装完毕后，重新启动transmission服务"></a>安装完毕后，重新启动transmission服务</h3><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li><a href="http://IP地址:9091" target="_blank" rel="noopener">http://IP地址:9091</a></li>
+<li><a href="http://域名:9091" target="_blank" rel="noopener">http://域名:9091</a></li>
+<li>正确输入用户名transmission与密码后，即可访问Transmission的Web管理界面,后续可以进行进一步的配置</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://www.anyewuji.com/69" target="_blank" rel="noopener">https://www.anyewuji.com/69</a></li>
+<li><a href="https://github.com/ronggang/transmission-web-control/wiki/Linux-Installation-CN" target="_blank" rel="noopener">https://github.com/ronggang/transmission-web-control/wiki/Linux-Installation-CN</a></li>
+<li><a href="https://www.zhihu.com/question/40101158" target="_blank" rel="noopener">https://www.zhihu.com/question/40101158</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/01/oh-my-zsh配置/" rel="next" title="oh-my-zsh配置">
+                <i class="fa fa-chevron-left"></i> oh-my-zsh配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">KaiFang</p>
+              <p class="site-description motion-element" itemprop="description">hello world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hack-fang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ubuntu-下-Transmission-WEB-安装、配置和美化"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu 下 Transmission WEB 安装、配置和美化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更换PPA"><span class="nav-number">1.1.1.</span> <span class="nav-text">更换PPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新源"><span class="nav-number">1.1.2.</span> <span class="nav-text">更新源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Transmission"><span class="nav-number">1.1.3.</span> <span class="nav-text">安装Transmission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#至此安装部分结束，接下来是配置部分"><span class="nav-number">1.1.4.</span> <span class="nav-text">至此安装部分结束，接下来是配置部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启用和停止Transmission的命令"><span class="nav-number">1.2.1.</span> <span class="nav-text">启用和停止Transmission的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑配置文件之前先停止Tranmission服务"><span class="nav-number">1.2.2.</span> <span class="nav-text">编辑配置文件之前先停止Tranmission服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑配置文件"><span class="nav-number">1.2.3.</span> <span class="nav-text">编辑配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改参数（附上自用的完整参数及说明）"><span class="nav-number">1.2.4.</span> <span class="nav-text">修改参数（附上自用的完整参数及说明）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对PT来说一些重要的设置项-一定要把PEX、LDP和DHT关掉，否则有封号的风险！"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">对PT来说一些重要的设置项,一定要把PEX、LDP和DHT关掉，否则有封号的风险！</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完整的设置项"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">完整的设置项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限管理"><span class="nav-number">1.3.</span> <span class="nav-text">权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#因为我们修改了默认的下载路径，而那个目录，默认安装的transmission是没有读写权限的，而且安装的transmission的用户组是debian-transmission。"><span class="nav-number">1.3.1.</span> <span class="nav-text">因为我们修改了默认的下载路径，而那个目录，默认安装的transmission是没有读写权限的，而且安装的transmission的用户组是debian-transmission。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#切换到HOME目录，执行"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">切换到HOME目录，执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改777权限"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">修改777权限</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI美化"><span class="nav-number">1.4.</span> <span class="nav-text">UI美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据操作提示安装即可-教程"><span class="nav-number">1.4.1.</span> <span class="nav-text">根据操作提示安装即可,教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装完毕后，重新启动transmission服务"><span class="nav-number">1.4.2.</span> <span class="nav-text">安装完毕后，重新启动transmission服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">1.5.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">1.6.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaiFang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
