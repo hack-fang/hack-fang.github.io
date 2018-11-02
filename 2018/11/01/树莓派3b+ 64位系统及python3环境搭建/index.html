@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="服务器,ubuntu," />
+  <meta name="keywords" content="Ubuntu,树莓派," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content=" Ubuntu 是基于Debian GNU/Linux，分为桌面版和服务器版，Ubuntu每六个月便会发布一个新版，以便人们实时地获取和使用新软件。Ubuntu共有五个长期支持版本(Long Term Support，LTS)：Ubuntu 6.06、8.04、10.04、12.04、14.04、16.04。">
-<meta name="keywords" content="服务器,ubuntu">
+<meta name="description" content="树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。">
+<meta name="keywords" content="Ubuntu,树莓派">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu 16.04 server 安装和部署">
-<meta property="og:url" content="http://yoursite.com/2018/04/15/ubuntu 16.04 server 安装和部署/index.html">
+<meta property="og:title" content="树莓派3b+ 64位系统环境搭建">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content=" Ubuntu 是基于Debian GNU/Linux，分为桌面版和服务器版，Ubuntu每六个月便会发布一个新版，以便人们实时地获取和使用新软件。Ubuntu共有五个长期支持版本(Long Term Support，LTS)：Ubuntu 6.06、8.04、10.04、12.04、14.04、16.04。">
+<meta property="og:description" content="树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-16T08:52:02.920Z">
+<meta property="og:updated_time" content="2018-11-02T10:39:33.289Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu 16.04 server 安装和部署">
-<meta name="twitter:description" content=" Ubuntu 是基于Debian GNU/Linux，分为桌面版和服务器版，Ubuntu每六个月便会发布一个新版，以便人们实时地获取和使用新软件。Ubuntu共有五个长期支持版本(Long Term Support，LTS)：Ubuntu 6.06、8.04、10.04、12.04、14.04、16.04。">
+<meta name="twitter:title" content="树莓派3b+ 64位系统环境搭建">
+<meta name="twitter:description" content="树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/15/ubuntu 16.04 server 安装和部署/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/"/>
 
 
 
 
 
-  <title>ubuntu 16.04 server 安装和部署 | Hexo</title>
+  <title>树莓派3b+ 64位系统环境搭建 | Hexo</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/15/ubuntu 16.04 server 安装和部署/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="KaiFang">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ubuntu 16.04 server 安装和部署</h1>
+          <h1 class="post-title" itemprop="name headline">树莓派3b+ 64位系统环境搭建</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T10:39:30+08:00">
-                2018-04-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T18:38:02+08:00">
+                2018-11-01
               </time>
             
 
@@ -352,53 +352,64 @@
       
 
       
-        <h2 id=""><a href="#" class="headerlink" title=""></a></h2><blockquote>
-<p>Ubuntu 是基于Debian GNU/Linux，分为桌面版和服务器版，Ubuntu每六个月便会发布一个新版，以便人们实时地获取和使用新软件。Ubuntu共有五个长期支持版本(Long Term Support，LTS)：Ubuntu 6.06、8.04、10.04、12.04、14.04、16.04。<br><a id="more"></a></p>
+        <hr>
+<blockquote>
+<p>树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。<a id="more"></a></p>
 </blockquote>
-<h2 id="安装ubuntu-16-04-server的过程，留作备份"><a href="#安装ubuntu-16-04-server的过程，留作备份" class="headerlink" title="安装ubuntu 16.04 server的过程，留作备份"></a>安装ubuntu 16.04 server的过程，留作备份</h2><h2 id="一、ubuntu-server-16-04-LTS-系统安装"><a href="#一、ubuntu-server-16-04-LTS-系统安装" class="headerlink" title="一、ubuntu server 16.04 LTS 系统安装"></a>一、ubuntu server 16.04 LTS 系统安装</h2><ol>
-<li>首先是刻录镜像到u盘这个暂且不说，教程很多。推荐用软碟通去刻录到u盘中，然后重启电脑，选择u盘启动即可进入安装界面</li>
-<li>出现<font color="red">语言</font>语言选择界面，我们选择<font color="red">English </font>,回车进入下一步</li>
-<li>默认选择第一项:<font color="red">Install Ubuntu Server</font>，回车再弹出界面中选择<font color="red">时区</font> –&gt; Hong Kong </li>
-<li>选择<font color="red">键盘布局所属国家(keyboard)</font> –&gt; English（US），等待预加载完毕</li>
-<li>选择<font color="red">网络配置(network）</font>–&gt; 默认回车即可</li>
-<li>设置<font color="red">主机名(hostname)</font> –&gt; 自由设置，默认为ubutnu</li>
-<li>设置<font color="red">用户名(username)</font> –&gt; 自由设置，作为登录使用</li>
-<li>设置<font color="red">密码设置(password)</font> –&gt; 自由设置，可不填写</li>
-<li>选择<font color="red">是否加密home目录(encrypt home directory)</font> –&gt; No</li>
-<li>选择<font color="red">时区是否正确</font> –&gt; 正确选Yes，不正确选No手动选择 </li>
-<li>设置<font color="red">磁盘分区(parition disks)</font> –&gt; Manual</li>
-<li>选择<font color="red">磁盘</font> –&gt; 选要选择的磁盘以SCSI开头</li>
-<li>选择<font color="red">新建一个空白分区表(create a new empty parition table on this device)</font> –&gt; Yes,选择磁盘空闲空间<font color="red">FREE SPACE    </font></li>
-<li>选择<font color="red">新建分区(create a new partition)</font> –&gt; 输入空间大小<font color="red">new partition size</font> –&gt; 选择<font color="red">Primary</font> –&gt; 选择<font color="red">头部建立(Biginning)</font> –&gt; 设置资料系统<font color="red">file system</font> –&gt; 设置挂载点<font color="red">Mount point</font> –&gt;点击分区设定完毕<font color="red">Done seeting up the partition</font>,反复三次，分别建立以下3个分区<br>| 挂载点名称 | 文件格式 | 空间大小 |<br>|  ——  |  —– |——– |<br>| /boot    | ext4   | 400MB   |<br>| /swap    | swap   | 内存大小的1.5-2倍 |<br>| /        | ext4   | max   |</li>
-<li>选择结束分区并写入磁盘</li>
-<li>设置网络代理<font color="red">HTTP proxy</font> –&gt; Continue</li>
-<li>设置不自动更新<font color="red">No automatic update</font></li>
-<li>选择需要安装的软件<font color="red">Choose software to install</font> –&gt; 空格为选定</li>
-<li>安装<font color="red">GRUB boot loader</font> –&gt; yes</li>
-<li>完成安装重启</li>
-</ol>
-<h2 id="二、-安装完成后的一些配置"><a href="#二、-安装完成后的一些配置" class="headerlink" title="二、 安装完成后的一些配置"></a>二、 安装完成后的一些配置</h2><ol>
-<li>登录系统，输入设置好的username 和 password</li>
-<li><p>启用root账号来提升权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看当前网络状态，默认网卡为en开头那块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编辑配置网络，服务器需要固定其ip来让外部用户使用，位于/etc/network下，文件名为interface</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/network/interfaces.d</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改The primary network interface 下的内容保存后推出</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto 网卡名</span><br><span class="line">iface 网卡名 inet static # 设置为静态ip</span><br><span class="line">address 固定ip地址       # 静态ip，可根据ifconfig中获取到的ip地址信息写</span><br><span class="line">netmask <span class="number">255.255</span>.<span class="number">255.0</span>   # 子网掩码，可根据ifconfig信息</span><br><span class="line">gateway 网关            # 网关，可根据ifconfig信息</span><br><span class="line">dns-nameserver <span class="number">8.8</span>.<span class="number">8.8</span>  # 设置dns</span><br><span class="line">dns-nameserver <span class="number">114.114</span>.<span class="number">114.114</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启网络，应用配置，若未生效，则需要重启服务器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service networking restart</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="三、更新"><a href="#三、更新" class="headerlink" title="三、更新"></a>三、更新</h2><p>正式使用之前需要更新软件源和软件包，可能需要root权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get update</span><br><span class="line">$ apt-get upgrade</span><br></pre></td></tr></table></figure></p>
-<p>更换软件源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure></p>
-<p>先注释默认的，再选择最合适的软件源，</p>
-<p>更多的软件源: <a href="http://www.cnblogs.com/dtiove/p/5917263.html" target="_blank" rel="noopener">软件源</a></p>
+<hr>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>树莓派3B+是在2018年pi日（3月14日）发售的目前为止树莓派家族当中最新，性能最强，也是功耗最高的一款产品，具有着以下的新特性</p>
+<ul>
+<li>博通BCM2837B0 SoC，集成四核ARM Cortex-A53（ARMv8）64位@ 1.4GHz CPU，集成博通 Videocore-IV GPU</li>
+<li>内存：1GB LPDDR2 SDRAM</li>
+<li>有线网络：千兆以太网（通过USB2.0通道，最大吞吐量 300Mbps）</li>
+<li>无线网络:2.4GHz和5GHz 双频Wi-Fi，支持802.11b/g/n/ac</li>
+<li>蓝牙：蓝牙4.2&amp;低功耗蓝牙（BLE）</li>
+<li>存储：Micro-SD</li>
+<li>其他接口：HDMI，3.5mm模拟音频视频插孔，4x USB 2.0，以太网，摄像机串行接口（CSI），显示器串行接口（DSI），MicroSD卡座，40pin扩展双排插针</li>
+</ul>
+<h2 id="安装Ubuntu18-04"><a href="#安装Ubuntu18-04" class="headerlink" title="安装Ubuntu18.04"></a>安装Ubuntu18.04</h2><p>Ubuntu官方暂时还未对3B+有官方的支持，chainsx 自行编译了Ubuntu18.04 64位版本 <a href="https://github.com/chainsx/ubuntu64-rpi/blob/ubuntu-18.04-arm64/Documentation/bionic-release.md" target="_blank" rel="noopener">github</a></p>
+<h3 id="下载与烧录"><a href="#下载与烧录" class="headerlink" title="下载与烧录"></a>下载与烧录</h3><ul>
+<li>下载链接中的Ubuntu镜像，通过读卡器读取16G sd卡</li>
+<li>windows下使用win32diskimager写入</li>
+<li>在linux或mac上直接使用dd命令刷入 参考教程:<a href="https://blog.csdn.net/qq_27068845/article/details/80472295" target="_blank" rel="noopener">教程</a></li>
+<li>烧录完成后插入sd至树莓派通电</li>
+</ul>
+<h3 id="默认的一些配置说明"><a href="#默认的一些配置说明" class="headerlink" title="默认的一些配置说明"></a>默认的一些配置说明</h3><ul>
+<li>apt源默认为清华软件源</li>
+<li>默认用户:ubuntu 密码: ubuntu</li>
+<li>默认开启ssh</li>
+<li>第一次开机时会自动拓展根目录，然后会自动重启，重启后会配置系统，需要耐心等待</li>
+<li>集成了raspi-config,chainsx-tools系统集成管理工具，使用方法：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br><span class="line">sudo chainsx-tools</span><br></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>一些常用的软件如python3,oh-my-zsh,git的配置</p>
+<h3 id="Python3-编译安装"><a href="#Python3-编译安装" class="headerlink" title="Python3 编译安装"></a>Python3 编译安装</h3><ul>
+<li>依赖库安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev libssl-dev openssl libgdbm-dev liblzma-dev libreadline-dev libncursesw5-dev</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Python3.6.6 源码下载、解压、编译、安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz</span><br><span class="line">tar xzf Python-3.6.6.tgz</span><br><span class="line"><span class="built_in">cd</span> Python-3.6.6</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>编译安装时间大概半小时左右，可以先忙别的事</p>
+<ul>
+<li>创建软连接(可省略)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/<span class="built_in">local</span>/bin/python3.6 /usr/bin/python3.6</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装pip3</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-pip</span><br></pre></td></tr></table></figure>
+<p>python3.6.6环境到此安装结束</p>
+<h3 id="oh-my-zsh安装"><a href="#oh-my-zsh安装" class="headerlink" title="oh-my-zsh安装"></a>oh-my-zsh安装</h3><p>参考上篇oh-my-zsh 在linux环境下的安装方法</p>
+<h3 id="GIT-VIM-安装"><a href="#GIT-VIM-安装" class="headerlink" title="GIT VIM 安装"></a>GIT VIM 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git vim</span><br></pre></td></tr></table></figure>
+<h3 id="树莓派GPIO控制"><a href="#树莓派GPIO控制" class="headerlink" title="树莓派GPIO控制"></a>树莓派GPIO控制</h3><p>树莓派内核中已经编译自带了 gpio 的驱动，我们常通过一些第三方写好的库函数来完成具体的操作，比较常见的操作库函数有:</p>
+<ul>
+<li>Python GPIO Python语言</li>
+<li>wiringPi C语言</li>
+<li>Pi4J Java语言</li>
+</ul>
+<h3 id="树莓派串口通信"><a href="#树莓派串口通信" class="headerlink" title="树莓派串口通信"></a>树莓派串口通信</h3><p>串口通信可采用c语言编写，也可以采用Python来编写，Python下有一个Pyserial <a href="https://github.com/pyserial/pyserial" target="_blank" rel="noopener">github地址</a></p>
 
       
     </div>
@@ -416,9 +427,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/服务器/" rel="tag"># 服务器</a>
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
           
-            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+            <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
           
         </div>
       
@@ -431,15 +442,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/09/13/Transmission-WEB-配置/" rel="next" title="Transmission WEB 配置">
+                <i class="fa fa-chevron-left"></i> Transmission WEB 配置
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/16/gitlab服务器搭建和部署/" rel="prev" title="gitlab服务器搭建和部署">
-                gitlab服务器搭建和部署 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -581,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ubuntu-16-04-server的过程，留作备份"><span class="nav-number">2.</span> <span class="nav-text">安装ubuntu 16.04 server的过程，留作备份</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、ubuntu-server-16-04-LTS-系统安装"><span class="nav-number">3.</span> <span class="nav-text">一、ubuntu server 16.04 LTS 系统安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、-安装完成后的一些配置"><span class="nav-number">4.</span> <span class="nav-text">二、 安装完成后的一些配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、更新"><span class="nav-number">5.</span> <span class="nav-text">三、更新</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Ubuntu18-04"><span class="nav-number">2.</span> <span class="nav-text">安装Ubuntu18.04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载与烧录"><span class="nav-number">2.1.</span> <span class="nav-text">下载与烧录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认的一些配置说明"><span class="nav-number">2.2.</span> <span class="nav-text">默认的一些配置说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3-编译安装"><span class="nav-number">3.1.</span> <span class="nav-text">Python3 编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oh-my-zsh安装"><span class="nav-number">3.2.</span> <span class="nav-text">oh-my-zsh安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GIT-VIM-安装"><span class="nav-number">3.3.</span> <span class="nav-text">GIT VIM 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树莓派GPIO控制"><span class="nav-number">3.4.</span> <span class="nav-text">树莓派GPIO控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树莓派串口通信"><span class="nav-number">3.5.</span> <span class="nav-text">树莓派串口通信</span></a></li></ol></li></ol></div>
             
 
           </div>
