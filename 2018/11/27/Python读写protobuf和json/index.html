@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Ubuntu,树莓派," />
+  <meta name="keywords" content="Ubuntu,Python," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。">
-<meta name="keywords" content="Ubuntu,树莓派">
+<meta name="description" content="Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。JSON是一种基于JavaScript语法的轻量级数据交换格式，它独立于语言与平台，具有自我描述性，易于理解，便于解析与生成，优秀的特性使得JSON被越来越多的使">
+<meta name="keywords" content="Ubuntu,Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派3b+ 64位系统环境搭建">
-<meta property="og:url" content="http://yoursite.com/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/index.html">
+<meta property="og:title" content="Python读写protobuf和json">
+<meta property="og:url" content="http://yoursite.com/2018/11/27/Python读写protobuf和json/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。">
+<meta property="og:description" content="Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。JSON是一种基于JavaScript语法的轻量级数据交换格式，它独立于语言与平台，具有自我描述性，易于理解，便于解析与生成，优秀的特性使得JSON被越来越多的使">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-02T10:39:33.289Z">
+<meta property="og:updated_time" content="2018-11-27T04:53:19.874Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树莓派3b+ 64位系统环境搭建">
-<meta name="twitter:description" content="树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。">
+<meta name="twitter:title" content="Python读写protobuf和json">
+<meta name="twitter:description" content="Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。JSON是一种基于JavaScript语法的轻量级数据交换格式，它独立于语言与平台，具有自我描述性，易于理解，便于解析与生成，优秀的特性使得JSON被越来越多的使">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/27/Python读写protobuf和json/"/>
 
 
 
 
 
-  <title>树莓派3b+ 64位系统环境搭建 | Hexo</title>
+  <title>Python读写protobuf和json | Hexo</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/27/Python读写protobuf和json/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="KaiFang">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">树莓派3b+ 64位系统环境搭建</h1>
+          <h1 class="post-title" itemprop="name headline">Python读写protobuf和json</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T18:38:02+08:00">
-                2018-11-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-27T11:05:02+08:00">
+                2018-11-27
               </time>
             
 
@@ -354,62 +354,32 @@
       
         <hr>
 <blockquote>
-<p>树莓派（Raspberry Pi），是一款基于Linux的单片机计算机。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件促进学校的基本计算机科学教育。迄今为止最新的产品为3B+，官方的系统并不好用，本文采用的是大神编译的64位Ubuntu18.04系统。<a id="more"></a></p>
+<p>Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。JSON是一种基于JavaScript语法的轻量级数据交换格式，它独立于语言与平台，具有自我描述性，易于理解，便于解析与生成，优秀的特性使得JSON被越来越多的使用<a id="more"></a></p>
 </blockquote>
 <hr>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>树莓派3B+是在2018年pi日（3月14日）发售的目前为止树莓派家族当中最新，性能最强，也是功耗最高的一款产品，具有着以下的新特性</p>
-<ul>
-<li>博通BCM2837B0 SoC，集成四核ARM Cortex-A53（ARMv8）64位@ 1.4GHz CPU，集成博通 Videocore-IV GPU</li>
-<li>内存：1GB LPDDR2 SDRAM</li>
-<li>有线网络：千兆以太网（通过USB2.0通道，最大吞吐量 300Mbps）</li>
-<li>无线网络:2.4GHz和5GHz 双频Wi-Fi，支持802.11b/g/n/ac</li>
-<li>蓝牙：蓝牙4.2&amp;低功耗蓝牙（BLE）</li>
-<li>存储：Micro-SD</li>
-<li>其他接口：HDMI，3.5mm模拟音频视频插孔，4x USB 2.0，以太网，摄像机串行接口（CSI），显示器串行接口（DSI），MicroSD卡座，40pin扩展双排插针</li>
+<h2 id="安装protobuf和json"><a href="#安装protobuf和json" class="headerlink" title="安装protobuf和json"></a>安装protobuf和json</h2><ul>
+<li>由于python标准库已经支持json的读写，因此不需要额外的安装一些依赖，而protobuf则需要额外的安装依赖,直接<code>pip3</code>安装即可(protobuf3)</li>
 </ul>
-<h2 id="安装Ubuntu18-04"><a href="#安装Ubuntu18-04" class="headerlink" title="安装Ubuntu18.04"></a>安装Ubuntu18.04</h2><p>Ubuntu官方暂时还未对3B+有官方的支持，chainsx 自行编译了Ubuntu18.04 64位版本 <a href="https://github.com/chainsx/ubuntu64-rpi/blob/ubuntu-18.04-arm64/Documentation/bionic-release.md" target="_blank" rel="noopener">github</a></p>
-<h3 id="下载与烧录"><a href="#下载与烧录" class="headerlink" title="下载与烧录"></a>下载与烧录</h3><ul>
-<li>下载链接中的Ubuntu镜像，通过读卡器读取16G sd卡</li>
-<li>windows下使用win32diskimager写入</li>
-<li>在linux或mac上直接使用dd命令刷入 参考教程:<a href="https://blog.csdn.net/qq_27068845/article/details/80472295" target="_blank" rel="noopener">教程</a></li>
-<li>烧录完成后插入sd至树莓派通电</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install protobuf -i  https://mirrors.aliyun.com/pypi/simple</span><br></pre></td></tr></table></figure>
+<h2 id="protobuf文件的定义-参考官方教程即可官网-本文不作过多的描述"><a href="#protobuf文件的定义-参考官方教程即可官网-本文不作过多的描述" class="headerlink" title="protobuf文件的定义 参考官方教程即可官网 本文不作过多的描述"></a>protobuf文件的定义 参考官方教程即可<a href="https://developers.google.com/protocol-buffers/docs/pythontutorial" target="_blank" rel="noopener">官网</a> 本文不作过多的描述</h2><h2 id="python3对protobuf文件的编译"><a href="#python3对protobuf文件的编译" class="headerlink" title="python3对protobuf文件的编译"></a>python3对protobuf文件的编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入proto文件所在目录，以addressbook.proto文件为例，会生成对应的*.py文件</span></span><br><span class="line">protoc --python_out=. addressbook.proto</span><br></pre></td></tr></table></figure>
+<h2 id="使用protobuf-API"><a href="#使用protobuf-API" class="headerlink" title="使用protobuf API"></a>使用protobuf API</h2><ul>
+<li>使用起来非常方便，直接导入即可</li>
+<li>网上的教程大部分都是翻译官网的教程，更深入的基本没有发现，在实际使用中总结除了几点注意事项</li>
+<li><p>注意事项</p>
+<ol>
+<li>protobuf如果采用了struct类型，对应到python中也有对应的struct模块，struct模块主要用来打包二进制数据和解包二进制数据，千万不能在python中直接拼接数据!!!struct打包解包分别为<code>struct.pack()</code>和<code>struct.unpack()</code>更多使用细节请参考<code>struct</code>模块的使用</li>
+<li><p>如果想定义一个空的message的话，这种情况一般会出现在message嵌套message。请使用<code>CopyFrom</code>函数如:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># a是空的消息的实例</span></span><br><span class="line">a = message_pb2.DepotInfoMsg()</span><br><span class="line"><span class="comment"># b是消息的实例</span></span><br><span class="line">b = message_pb2.SynchInformationRequestMsg()</span><br><span class="line"><span class="comment"># 定义b中的各种参数值</span></span><br><span class="line">b.id = 1</span><br><span class="line">b.name = 1</span><br><span class="line"><span class="comment"># depotinfo 是嵌套在b中的message，通过CopyFrom函数来让它初始化</span></span><br><span class="line">b.depotinfo.CopyFrom(a)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>message序列化和反序列化，使用<code>SerializeToStrin</code>和<code>ParseFromString</code>这两个函数即可，另外值得一提的是提供了message转json的方法可以直接使用,借助<code>from google.protobuf.json_format import MessageToJson</code>，可以很快将反序列化后的message转成熟悉的json格式</p>
+</li>
+</ol>
+</li>
 </ul>
-<h3 id="默认的一些配置说明"><a href="#默认的一些配置说明" class="headerlink" title="默认的一些配置说明"></a>默认的一些配置说明</h3><ul>
-<li>apt源默认为清华软件源</li>
-<li>默认用户:ubuntu 密码: ubuntu</li>
-<li>默认开启ssh</li>
-<li>第一次开机时会自动拓展根目录，然后会自动重启，重启后会配置系统，需要耐心等待</li>
-<li>集成了raspi-config,chainsx-tools系统集成管理工具，使用方法：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br><span class="line">sudo chainsx-tools</span><br></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>一些常用的软件如python3,oh-my-zsh,git的配置</p>
-<h3 id="Python3-编译安装"><a href="#Python3-编译安装" class="headerlink" title="Python3 编译安装"></a>Python3 编译安装</h3><ul>
-<li>依赖库安装</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev libssl-dev openssl libgdbm-dev liblzma-dev libreadline-dev libncursesw5-dev</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Python3.6.6 源码下载、解压、编译、安装</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz</span><br><span class="line">tar xzf Python-3.6.6.tgz</span><br><span class="line"><span class="built_in">cd</span> Python-3.6.6</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>编译安装时间大概半小时左右，可以先忙别的事</p>
-<ul>
-<li>创建软连接(可省略)</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/<span class="built_in">local</span>/bin/python3.6 /usr/bin/python3.6</span><br></pre></td></tr></table></figure>
-<ul>
-<li>安装pip3</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-pip</span><br></pre></td></tr></table></figure>
-<p>python3.6.6环境到此安装结束</p>
-<h3 id="oh-my-zsh安装"><a href="#oh-my-zsh安装" class="headerlink" title="oh-my-zsh安装"></a>oh-my-zsh安装</h3><p>参考上篇oh-my-zsh 在linux环境下的安装方法</p>
-<h3 id="GIT-VIM-安装"><a href="#GIT-VIM-安装" class="headerlink" title="GIT VIM 安装"></a>GIT VIM 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git vim</span><br></pre></td></tr></table></figure>
-<h3 id="树莓派GPIO控制"><a href="#树莓派GPIO控制" class="headerlink" title="树莓派GPIO控制"></a>树莓派GPIO控制</h3><p>树莓派内核中已经编译自带了 gpio 的驱动，我们常通过一些第三方写好的库函数来完成具体的操作，比较常见的操作库函数有:</p>
-<ul>
-<li>Python GPIO Python语言</li>
-<li>wiringPi C语言</li>
-<li>Pi4J Java语言</li>
-</ul>
-<h3 id="树莓派串口通信"><a href="#树莓派串口通信" class="headerlink" title="树莓派串口通信"></a>树莓派串口通信</h3><p>串口通信可采用c语言编写，也可以采用Python来编写，Python下有一个Pyserial <a href="https://github.com/pyserial/pyserial" target="_blank" rel="noopener">github地址</a></p>
+<h2 id="读写JSON"><a href="#读写JSON" class="headerlink" title="读写JSON"></a>读写JSON</h2><p>python对JSON支持相当好，内置的dict类型和JSON类型及其相似，因此CRUD JSON中的数据是通过对dict 操作</p>
+<h3 id="读取json文件"><a href="#读取json文件" class="headerlink" title="读取json文件"></a>读取json文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用utf-8编码防止中文乱码,data类型为json类型</span></span><br><span class="line"><span class="keyword">with</span> open(path, <span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = json.load(f)</span><br></pre></td></tr></table></figure>
+<h3 id="写json文件"><a href="#写json文件" class="headerlink" title="写json文件"></a>写json文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用utf-8编码防止中文乱码,indent=4会格式化json，data类型为字典类型</span></span><br><span class="line"><span class="keyword">with</span> open(path, <span class="string">"w"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(data, f, ensure_ascii=<span class="keyword">False</span>, indent=<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="json类型和dict类型转换"><a href="#json类型和dict类型转换" class="headerlink" title="json类型和dict类型转换"></a>json类型和dict类型转换</h3><p>json.dumps() 和json.loads()</p>
 
       
     </div>
@@ -429,7 +399,7 @@
           
             <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
           
-            <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -442,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/13/Transmission-WEB-配置/" rel="next" title="Transmission WEB 配置">
-                <i class="fa fa-chevron-left"></i> Transmission WEB 配置
+              <a href="/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/" rel="next" title="树莓派3b+ 64位系统环境搭建">
+                <i class="fa fa-chevron-left"></i> 树莓派3b+ 64位系统环境搭建
               </a>
             
           </div>
@@ -451,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/27/Python读写protobuf和json/" rel="prev" title="Python读写protobuf和json">
-                Python读写protobuf和json <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -596,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Ubuntu18-04"><span class="nav-number">2.</span> <span class="nav-text">安装Ubuntu18.04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载与烧录"><span class="nav-number">2.1.</span> <span class="nav-text">下载与烧录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认的一些配置说明"><span class="nav-number">2.2.</span> <span class="nav-text">默认的一些配置说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3-编译安装"><span class="nav-number">3.1.</span> <span class="nav-text">Python3 编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oh-my-zsh安装"><span class="nav-number">3.2.</span> <span class="nav-text">oh-my-zsh安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GIT-VIM-安装"><span class="nav-number">3.3.</span> <span class="nav-text">GIT VIM 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树莓派GPIO控制"><span class="nav-number">3.4.</span> <span class="nav-text">树莓派GPIO控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树莓派串口通信"><span class="nav-number">3.5.</span> <span class="nav-text">树莓派串口通信</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装protobuf和json"><span class="nav-number">1.</span> <span class="nav-text">安装protobuf和json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#protobuf文件的定义-参考官方教程即可官网-本文不作过多的描述"><span class="nav-number">2.</span> <span class="nav-text">protobuf文件的定义 参考官方教程即可官网 本文不作过多的描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python3对protobuf文件的编译"><span class="nav-number">3.</span> <span class="nav-text">python3对protobuf文件的编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用protobuf-API"><span class="nav-number">4.</span> <span class="nav-text">使用protobuf API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写JSON"><span class="nav-number">5.</span> <span class="nav-text">读写JSON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读取json文件"><span class="nav-number">5.1.</span> <span class="nav-text">读取json文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写json文件"><span class="nav-number">5.2.</span> <span class="nav-text">写json文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json类型和dict类型转换"><span class="nav-number">5.3.</span> <span class="nav-text">json类型和dict类型转换</span></a></li></ol></li></ol></div>
             
 
           </div>
