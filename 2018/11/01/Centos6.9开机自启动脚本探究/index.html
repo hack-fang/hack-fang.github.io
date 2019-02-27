@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="git," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="GitLab是一个基于 Web 的 Git 仓库管理工具，且具有wiki 和 issue 跟踪功能。GitLab 由 GitLab Inc. 开发，使用开源许可证。GitLab 由乌克兰程序员 Dmitriy Zaporozhets 和 Valery Sizov 开发。它由 Ruby 写成。后来，一些部分用Go语言重写。截止2016年12月，该公司有150名团队成员，以及1400多名开源贡献者。">
-<meta name="keywords" content="git">
+<meta name="description" content="最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gitlab服务器搭建和部署">
-<meta property="og:url" content="http://yoursite.com/2018/04/16/gitlab服务器搭建和部署/index.html">
+<meta property="og:title" content="Centos6.9 开机自启动脚本">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/Centos6.9开机自启动脚本探究/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="GitLab是一个基于 Web 的 Git 仓库管理工具，且具有wiki 和 issue 跟踪功能。GitLab 由 GitLab Inc. 开发，使用开源许可证。GitLab 由乌克兰程序员 Dmitriy Zaporozhets 和 Valery Sizov 开发。它由 Ruby 写成。后来，一些部分用Go语言重写。截止2016年12月，该公司有150名团队成员，以及1400多名开源贡献者。">
+<meta property="og:description" content="最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-16T08:47:07.225Z">
+<meta property="og:updated_time" content="2019-02-27T13:58:29.616Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gitlab服务器搭建和部署">
-<meta name="twitter:description" content="GitLab是一个基于 Web 的 Git 仓库管理工具，且具有wiki 和 issue 跟踪功能。GitLab 由 GitLab Inc. 开发，使用开源许可证。GitLab 由乌克兰程序员 Dmitriy Zaporozhets 和 Valery Sizov 开发。它由 Ruby 写成。后来，一些部分用Go语言重写。截止2016年12月，该公司有150名团队成员，以及1400多名开源贡献者。">
+<meta name="twitter:title" content="Centos6.9 开机自启动脚本">
+<meta name="twitter:description" content="最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/16/gitlab服务器搭建和部署/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/Centos6.9开机自启动脚本探究/"/>
 
 
 
 
 
-  <title>gitlab服务器搭建和部署 | Hexo</title>
+  <title>Centos6.9 开机自启动脚本 | Hexo</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/gitlab服务器搭建和部署/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/Centos6.9开机自启动脚本探究/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="KaiFang">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">gitlab服务器搭建和部署</h1>
+          <h1 class="post-title" itemprop="name headline">Centos6.9 开机自启动脚本</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T15:11:44+08:00">
-                2018-04-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T18:38:02+08:00">
+                2018-11-01
               </time>
             
 
@@ -352,24 +352,26 @@
       
 
       
-        <blockquote>
-<p>GitLab是一个基于 Web 的 Git 仓库管理工具，且具有wiki 和 issue 跟踪功能。GitLab 由 GitLab Inc. 开发，使用开源许可证。GitLab 由乌克兰程序员 Dmitriy Zaporozhets 和 Valery Sizov 开发。它由 Ruby 写成。后来，一些部分用Go语言重写。截止2016年12月，该公司有150名团队成员，以及1400多名开源贡献者。 GitLab被 IBM，Sony，Jülich Research Center，NASA，Alibaba，Invincea，O’Reilly Media，Leibniz-Rechenzentrum (LRZ)，CERN，SpaceX 等组织使用。<br><a id="more"></a></p>
+        <hr>
+<blockquote>
+<p>最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行<a id="more"></a></p>
 </blockquote>
-<h2 id="本文采用官方omnibus安装方法，运行在ubuntu-16-04-sever上"><a href="#本文采用官方omnibus安装方法，运行在ubuntu-16-04-sever上" class="headerlink" title="本文采用官方omnibus安装方法，运行在ubuntu 16.04 sever上"></a>本文采用官方omnibus安装方法，运行在ubuntu 16.04 sever上</h2><h3 id="1-安装配置必要的依赖关系"><a href="#1-安装配置必要的依赖关系" class="headerlink" title="1.安装配置必要的依赖关系"></a>1.安装配置必要的依赖关系</h3><p>让系统防火墙允许HTTP和SSH的方式访问</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y curl openssh-server ca-certificates</span><br></pre></td></tr></table></figure>
-<p>下一步安装postfix发送通知邮件，建议安装。在安装配置的屏幕可能会出现选项。选择“Internet站点”并按Enter键。使用服务器的外部DNS“邮件名称”并按Enter键。如果出现额外的信息，继续按回车键接受默认值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y postfix</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-添加gitlab安装包库"><a href="#2-添加gitlab安装包库" class="headerlink" title="2.添加gitlab安装包库"></a>2.添加gitlab安装包库</h3><p>添加gitlab安装库，可能要用到的<a href="https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/" target="_blank" rel="noopener">清华大学镜像源</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash</span><br></pre></td></tr></table></figure></p>
-<p>下一步，安装gitlab-ce，等待安装完成。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install gitlab-ce</span><br></pre></td></tr></table></figure>
-<h3 id="3-配置和启动Gitlab"><a href="#3-配置和启动Gitlab" class="headerlink" title="3.配置和启动Gitlab"></a>3.配置和启动Gitlab</h3><p>系统的默认端口可能会和系统的apache和nginx冲突，因此需要做一些修改</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/gitlab/gitlab.rb</span><br></pre></td></tr></table></figure>
-<p>找到<font color="red">external url</font> “http或https://修改成ip或者域名:端口号”，我采用“<a href="http://ip:8081”" target="_blank" rel="noopener">http://ip:8081”</a></p>
-<p>再找到Nginx staus,修改其中的<font color="red">listen_addresses</font> 为<font color="red">nginx[“listen_addresses”] = [“上一步的ip”]</font>。</p>
-<p>同样修改<font color="red">listen_port</font>为<font color="red">nginx[“listen_port] = [“端口号”]</font></p>
-<p>保存配置，重启命令使变更生效</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo  gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure>
-<p>完成后用浏览器打开设置好的<a href="http://ip:port,第一次会提示你设置一个root密码，输入后即可。" target="_blank" rel="noopener">http://ip:port,第一次会提示你设置一个root密码，输入后即可。</a></p>
-<p>后续的注册和建立暂且不提了和github基本一致。</p>
+<hr>
+<h2 id="查找资料"><a href="#查找资料" class="headerlink" title="查找资料"></a>查找资料</h2><p>网上介绍的方法也很多，必须吐槽一下csdn上的结果，真的就是每篇文章抄来抄去，内容质量太差了！最终找了一篇文章，按照文章中的提示最终成功了。<a href="https://cloud.tencent.com/developer/article/1360596" target="_blank" rel="noopener">参考链接</a></p>
+<h2 id="思路方案"><a href="#思路方案" class="headerlink" title="思路方案"></a>思路方案</h2><p>本来go编译出来的是linux可执行文件,直接运行 <code>chmod +x main</code>,<code>./main</code>就可以了，但是开机自启就比较麻烦了。根据参考文章中的方法，需要写一个bash脚本来管理这个<code>main</code>文件，查了一些资料在main文件目录下写了个<code>startup.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># startup.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">cd</span>  /home</span><br><span class="line"><span class="comment"># 赋予运行权限</span></span><br><span class="line">chmod +x main</span><br><span class="line"><span class="comment"># 运行并且忽略输出和错误，不会生成日志，因为程序里已经设置了生成log所以此处直接忽略，最后一个 &amp;  是保持后台运行 </span></span><br><span class="line">./main &gt;&gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>由于<code>main</code>文件需要读取其目录下的一个配置文件，所以需要在bash中切好路径，切不可直接采用<code>绝对路径</code>去运行这个<code>main</code>文件，会报错！</p>
+<h2 id="解决方案：修改-etc-rc-d-rc-local"><a href="#解决方案：修改-etc-rc-d-rc-local" class="headerlink" title="解决方案：修改/etc/rc.d/rc.local"></a>解决方案：修改/etc/rc.d/rc.local</h2><p>赋予 <code>startup.sh</code> 运行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /home/</span></span><br><span class="line">chmod +x startup.sh</span><br></pre></td></tr></table></figure>
+<p>vim修改<code>rc.local</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh /home/startup.sh</span><br></pre></td></tr></table></figure>
+<p>重启系统，运行 <code>ps -ef|grep main</code>，main文件已经运行起来了。</p>
+<p>如果没运行，手动在非 <code>startup.sh</code> 目录运行一下该脚本，看是否报错了。</p>
+<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><ul>
+<li>项目的系统无力吐槽了，用的是CentOS release 6.9 (Final)，和我常用的ubuntu16差多了啊！</li>
+<li>go真的很好用，虽然从python 转过去一开始有一点不适应，但是很快就接受了它，原因有：直接可以编译成一个可执行文件，扩平台，官方库很好用，go自带的go线程也很好用！</li>
+<li>网上的资料雷同太多了，找了很久才找到解决方法！</li>
+</ul>
 
       
     </div>
@@ -387,7 +389,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag"># git</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
       
@@ -400,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/15/ubuntu 16.04 server 安装和部署/" rel="next" title="ubuntu 16.04 server 安装和部署">
-                <i class="fa fa-chevron-left"></i> ubuntu 16.04 server 安装和部署
+              <a href="/2018/11/01/树莓派3b+ 64位系统及python3环境搭建/" rel="next" title="树莓派3b+ 64位系统环境搭建">
+                <i class="fa fa-chevron-left"></i> 树莓派3b+ 64位系统环境搭建
               </a>
             
           </div>
@@ -410,8 +412,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/01/oh-my-zsh配置/" rel="prev" title="oh-my-zsh配置">
-                oh-my-zsh配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/27/Python读写protobuf和json/" rel="prev" title="Python读写protobuf和json">
+                Python读写protobuf和json <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -554,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文采用官方omnibus安装方法，运行在ubuntu-16-04-sever上"><span class="nav-number">1.</span> <span class="nav-text">本文采用官方omnibus安装方法，运行在ubuntu 16.04 sever上</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装配置必要的依赖关系"><span class="nav-number">1.1.</span> <span class="nav-text">1.安装配置必要的依赖关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加gitlab安装包库"><span class="nav-number">1.2.</span> <span class="nav-text">2.添加gitlab安装包库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置和启动Gitlab"><span class="nav-number">1.3.</span> <span class="nav-text">3.配置和启动Gitlab</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查找资料"><span class="nav-number">1.</span> <span class="nav-text">查找资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路方案"><span class="nav-number">2.</span> <span class="nav-text">思路方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案：修改-etc-rc-d-rc-local"><span class="nav-number">3.</span> <span class="nav-text">解决方案：修改/etc/rc.d/rc.local</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感受"><span class="nav-number">4.</span> <span class="nav-text">感受</span></a></li></ol></div>
             
 
           </div>
