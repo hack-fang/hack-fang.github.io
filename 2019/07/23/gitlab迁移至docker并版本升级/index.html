@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 2px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在之前的文章中提到了在实验室的华为云服务器上安装了gitlab社区版本，并且开放提供给了实验室的所有同学去使用。gitlab社区版本更新的比较快，曾经尝试过手动去更新gitlab的版本，结果出现了报错信息，Stack Overflow 和 google 搜索了很多解决方式，终于解决了更新的报错问题。网上都推荐使用docker方式去部署，借着更换了新的华为服务器的机会，顺便把实验室的gitlab服">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitlab迁移至docker并版本升级.md">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/gitlab迁移至docker并版本升级/index.html">
+<meta property="og:site_name" content="Hack-Fang的博客">
+<meta property="og:description" content="在之前的文章中提到了在实验室的华为云服务器上安装了gitlab社区版本，并且开放提供给了实验室的所有同学去使用。gitlab社区版本更新的比较快，曾经尝试过手动去更新gitlab的版本，结果出现了报错信息，Stack Overflow 和 google 搜索了很多解决方式，终于解决了更新的报错问题。网上都推荐使用docker方式去部署，借着更换了新的华为服务器的机会，顺便把实验室的gitlab服">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/07/23/5d36a7f6892eb92377.png">
+<meta property="og:updated_time" content="2019-07-23T07:01:56.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gitlab迁移至docker并版本升级.md">
+<meta name="twitter:description" content="在之前的文章中提到了在实验室的华为云服务器上安装了gitlab社区版本，并且开放提供给了实验室的所有同学去使用。gitlab社区版本更新的比较快，曾经尝试过手动去更新gitlab的版本，结果出现了报错信息，Stack Overflow 和 google 搜索了很多解决方式，终于解决了更新的报错问题。网上都推荐使用docker方式去部署，借着更换了新的华为服务器的机会，顺便把实验室的gitlab服">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/23/5d36a7f6892eb92377.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/23/gitlab迁移至docker并版本升级/"/>
+
+
+
+
+
+  <title>gitlab迁移至docker并版本升级.md | Hack-Fang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hack-Fang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/gitlab迁移至docker并版本升级/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KaiFang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hack-Fang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">gitlab迁移至docker并版本升级.md</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-23T14:05:20+08:00">
+                2019-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/动手实战/" itemprop="url" rel="index">
+                    <span itemprop="name">动手实战</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/23/gitlab迁移至docker并版本升级/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/07/23/gitlab迁移至docker并版本升级/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>在之前的文章中提到了在实验室的华为云服务器上安装了gitlab社区版本，并且开放提供给了实验室的所有同学去使用。gitlab社区版本更新的比较快，曾经尝试过手动去更新gitlab的版本，结果出现了报错信息，Stack Overflow 和 google 搜索了很多解决方式，终于解决了更新的报错问题。网上都推荐使用docker方式去部署，借着更换了新的华为服务器的机会，顺便把实验室的gitlab服务器迁移到新的服务器上，并且使用docker部署并更新。本文记录了整个流程，以便后续查看。<br><a id="more"></a></p>
+</blockquote>
+<h2 id="备份Gitlab"><a href="#备份Gitlab" class="headerlink" title="备份Gitlab"></a>备份Gitlab</h2><p>因为需要数据迁移，我们首先需要把数据导出，gitlab导出数据非常方便，直接利用 <code>gitlab-rake</code> 命令备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake gitlab:backup:create</span><br></pre></td></tr></table></figure>
+<p>耐心等待几分钟备份完成即可</p>
+<p><img src="https://i.loli.net/2019/07/23/5d36a7f6892eb92377.png" alt="gitlab 备份"></p>
+<p>可以看到备份后的最新备份文件名为 1563413816_2019_07_18_11.4.4_gitlab_backup.tar</p>
+<ol>
+<li>备份后的文件使用 <code>winscp</code>下载至本地</li>
+<li><p>同时需要下载<strong>安全密钥文件</strong>，安全密钥文件里面存放了所有用户的ssh密钥信息，如果不复制这个文件，新的服务器上用户需要再次手动添加ssh密钥</p>
+</li>
+<li><p>安全密钥文件的目录在 /etc/gitlab/gitlab-secrets.json</p>
+</li>
+</ol>
+<h2 id="查看gitlab的版本"><a href="#查看gitlab的版本" class="headerlink" title="查看gitlab的版本"></a>查看gitlab的版本</h2><p>在docker中需要先安装和之前版本一致的gitlab版本</p>
+<p>运行下列命令查看gitlab的版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat /opt/gitlab/embedded/service/gitlab-rails/VERSION</span></span><br><span class="line">11.4.4</span><br></pre></td></tr></table></figure>
+<h2 id="docker中安装运行指定版本的gitlab"><a href="#docker中安装运行指定版本的gitlab" class="headerlink" title="docker中安装运行指定版本的gitlab"></a>docker中安装运行指定版本的gitlab</h2><p>docker的操作不多介绍，下面介绍docker-compose文件</p>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">web:</span><br><span class="line">  image: <span class="string">'gitlab/gitlab-ce:11.4.4-ce.0'</span> <span class="comment"># 版本为上面介绍的版本11.4.4-ce.0，需要手动增加 -ce.0</span></span><br><span class="line">  restart: always</span><br><span class="line">  hostname: <span class="string">'49.4.68.xx'</span> <span class="comment">#新的服务器ip地址</span></span><br><span class="line">  environment:</span><br><span class="line">    GITLAB_OMNIBUS_CONFIG: |</span><br><span class="line">      external_url <span class="string">'http://49.4.68.xx:5566'</span> <span class="comment">#IP地址加端口号</span></span><br><span class="line">      gitlab_rails[<span class="string">'gitlab_shell_ssh_port'</span>] = <span class="number">2222</span> <span class="comment">#修改ssh端口</span></span><br><span class="line">      gitlab_rails[<span class="string">'backup_path'</span>] = <span class="string">"/var/opt/gitlab/backups"</span>  <span class="comment">#设置备份文件路径</span></span><br><span class="line">  ports: <span class="comment">#端口映射</span></span><br><span class="line">    - <span class="string">'5566:5566'</span></span><br><span class="line">    - <span class="string">'2222:22'</span></span><br><span class="line">    - <span class="string">'8443:443'</span></span><br><span class="line">  volumes: <span class="comment">#数据卷挂载</span></span><br><span class="line">    - <span class="string">'/mnt/sdc/gitlab/config:/etc/gitlab'</span></span><br><span class="line">    - <span class="string">'/mnt/sdc/gitlab/logs:/var/log/gitlab'</span></span><br><span class="line">    - <span class="string">'/mnt/sdc/gitlab/data:/var/opt/gitlab'</span></span><br><span class="line">    - <span class="string">'/mnt/sdc/gitlab/backups:/var/opt/gitlab/backups'</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行docker-compose文件"><a href="#运行docker-compose文件" class="headerlink" title="运行docker-compose文件"></a>运行docker-compose文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker-compose up -d # 后台运行该目录下的docker-compose文件</span></span><br></pre></td></tr></table></figure>
+<p>然后使用 <code>winscp</code>将备份文件上传至 <code>/mnt/sdc/gitlab/backups</code> 目录下。</p>
+<p>然后进入容器中，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;容器名&gt; bash</span><br></pre></td></tr></table></figure>
+<h3 id="停止相关服务"><a href="#停止相关服务" class="headerlink" title="停止相关服务:"></a>停止相关服务:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitlab-ctl stop unicorn</span></span><br><span class="line">ok: down: unicorn:0s, normally up</span><br><span class="line"></span><br><span class="line"><span class="comment"># gitlab-ctl stop sidekiq</span></span><br><span class="line">ok: down: sidekiq:0s, normally up</span><br></pre></td></tr></table></figure>
+<h3 id="开始恢复"><a href="#开始恢复" class="headerlink" title="开始恢复"></a>开始恢复</h3><p>将安全密钥内容复制到 数据目录下的密钥文件中<br>进入备份目录下，找到上传的备份文件名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ls</span></span><br><span class="line">1563413816_2019_07_18_11.4.4_gitlab_backup.tar</span><br></pre></td></tr></table></figure>
+<p>然后运行gitlab恢复命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake gitlab:backup:restore BACKUP=1563413816_2019_07_18_11.4.4</span><br></pre></td></tr></table></figure>
+<p>按照提示输入要yes,等待恢复完成。</p>
+<h3 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h3><p>重启gitlab配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitlab-ctl restart</span></span><br></pre></td></tr></table></figure>
+<p>验证指令是否正常</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitlab-rake gitlab:check SANITIZE=true</span></span><br></pre></td></tr></table></figure>
+<h2 id="升级gitlab版本"><a href="#升级gitlab版本" class="headerlink" title="升级gitlab版本"></a>升级gitlab版本</h2><p>升级非常的容易，只需要将docker-compose文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># image: gitlab/gitlab-ce:11.4.4-ce.0</span></span><br></pre></td></tr></table></figure>
+<p>更改为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># image: gitlab/gitlab-ce:latest</span></span><br></pre></td></tr></table></figure>
+<p>然后运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>即升级到最新版本gitlab</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>docker中升级和安装gitlab都非常的方便，考虑以后将各种服务都安装在docker中</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/Centos6.9开机自启动脚本探究/" rel="next" title="Centos6.9 开机自启动脚本">
+                <i class="fa fa-chevron-left"></i> Centos6.9 开机自启动脚本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">KaiFang</p>
+              <p class="site-description motion-element" itemprop="description">hello world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hack-fang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135394248-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135394248-1');
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#备份Gitlab"><span class="nav-number">1.</span> <span class="nav-text">备份Gitlab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看gitlab的版本"><span class="nav-number">2.</span> <span class="nav-text">查看gitlab的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker中安装运行指定版本的gitlab"><span class="nav-number">3.</span> <span class="nav-text">docker中安装运行指定版本的gitlab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行docker-compose文件"><span class="nav-number">3.1.</span> <span class="nav-text">运行docker-compose文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#停止相关服务"><span class="nav-number">3.2.</span> <span class="nav-text">停止相关服务:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始恢复"><span class="nav-number">3.3.</span> <span class="nav-text">开始恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启服务"><span class="nav-number">3.4.</span> <span class="nav-text">重启服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级gitlab版本"><span class="nav-number">4.</span> <span class="nav-text">升级gitlab版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaiFang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://kaifangs-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/07/23/gitlab迁移至docker并版本升级/';
+          this.page.identifier = '2019/07/23/gitlab迁移至docker并版本升级/';
+          this.page.title = 'gitlab迁移至docker并版本升级.md';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://kaifangs-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
