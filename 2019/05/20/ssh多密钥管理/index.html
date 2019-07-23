@@ -82,7 +82,7 @@
 
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="git,ssh," />
 
 
 
@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行">
-<meta name="keywords" content="Linux">
+<meta name="description" content="当同时使用实验室的gitlab服务器和github服务器时候遇到了权限问题，下面给出了ssh密钥的生成和管理的最佳实践。">
+<meta name="keywords" content="git,ssh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos6.9 开机自启动脚本">
-<meta property="og:url" content="http://yoursite.com/2019/02/27/Centos6.9开机自启动脚本探究/index.html">
+<meta property="og:title" content="ssh多密钥管理">
+<meta property="og:url" content="http://yoursite.com/2019/05/20/ssh多密钥管理/index.html">
 <meta property="og:site_name" content="Hack-Fang的博客">
-<meta property="og:description" content="最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行">
+<meta property="og:description" content="当同时使用实验室的gitlab服务器和github服务器时候遇到了权限问题，下面给出了ssh密钥的生成和管理的最佳实践。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-27T14:03:44.677Z">
+<meta property="og:updated_time" content="2019-07-23T07:40:10.185Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos6.9 开机自启动脚本">
-<meta name="twitter:description" content="最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行">
+<meta name="twitter:title" content="ssh多密钥管理">
+<meta name="twitter:description" content="当同时使用实验室的gitlab服务器和github服务器时候遇到了权限问题，下面给出了ssh密钥的生成和管理的最佳实践。">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/27/Centos6.9开机自启动脚本探究/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/05/20/ssh多密钥管理/"/>
 
 
 
 
 
-  <title>Centos6.9 开机自启动脚本 | Hack-Fang的博客</title>
+  <title>ssh多密钥管理 | Hack-Fang的博客</title>
   
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/Centos6.9开机自启动脚本探究/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/20/ssh多密钥管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="KaiFang">
@@ -298,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Centos6.9 开机自启动脚本</h1>
+          <h1 class="post-title" itemprop="name headline">ssh多密钥管理</h1>
         
 
         <div class="post-meta">
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T18:38:02+08:00">
-                2019-02-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T15:04:44+08:00">
+                2019-05-20
               </time>
             
 
@@ -351,9 +351,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/27/Centos6.9开机自启动脚本探究/#comments" itemprop="discussionUrl">
+                <a href="/2019/05/20/ssh多密钥管理/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/27/Centos6.9开机自启动脚本探究/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/05/20/ssh多密钥管理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -381,26 +381,41 @@
       
 
       
-        <hr>
-<blockquote>
-<p>最近两周学习了下go语言，被它的交叉编译和无需依赖单文件吸引了，便把以前的一个项目软件用go重写了，同时编译了Linux和windwos版。windows版的运行和开机自启动十分简单，很快搞定，但是centos6.9系统自身就比较旧了，用不了centos7的新功能和docker，迫于项目的环境就是这系统，无奈在网上找了半天的资料，最终自己试验成功运行<a id="more"></a></p>
+        <blockquote>
+<p>当同时使用实验室的gitlab服务器和github服务器时候遇到了权限问题，下面给出了ssh密钥的生成和管理的最佳实践。<br><a id="more"></a></p>
 </blockquote>
-<hr>
-<h2 id="查找资料"><a href="#查找资料" class="headerlink" title="查找资料"></a>查找资料</h2><p>网上介绍的方法也很多，必须吐槽一下csdn上的结果，真的就是每篇文章抄来抄去，内容质量太差了！最终找了一篇文章，按照文章中的提示最终成功了。<a href="https://cloud.tencent.com/developer/article/1360596" target="_blank" rel="noopener">参考链接</a></p>
-<h2 id="思路方案"><a href="#思路方案" class="headerlink" title="思路方案"></a>思路方案</h2><p>本来go编译出来的是linux可执行文件,直接运行 <code>chmod +x main</code>,<code>./main</code>就可以了，但是开机自启就比较麻烦了。根据参考文章中的方法，需要写一个bash脚本来管理这个<code>main</code>文件，查了一些资料在main文件目录下写了个<code>startup.sh</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># startup.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">cd</span>  /home</span><br><span class="line"><span class="comment"># 赋予运行权限</span></span><br><span class="line">chmod +x main</span><br><span class="line"><span class="comment"># 运行并且忽略输出和错误，不会生成日志，因为程序里已经设置了生成log所以此处直接忽略，最后一个 &amp;  是保持后台运行 </span></span><br><span class="line">./main &gt;&gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>由于<code>main</code>文件需要读取其目录下的一个配置文件，所以需要在bash中切好路径，切不可直接采用<code>绝对路径</code>去运行这个<code>main</code>文件，会报错！</p>
-<h2 id="解决方案：修改-etc-rc-d-rc-local"><a href="#解决方案：修改-etc-rc-d-rc-local" class="headerlink" title="解决方案：修改/etc/rc.d/rc.local"></a>解决方案：修改/etc/rc.d/rc.local</h2><p>赋予 <code>startup.sh</code> 运行权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /home/</span></span><br><span class="line">chmod +x startup.sh</span><br></pre></td></tr></table></figure>
-<p>vim修改<code>rc.local</code>文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh /home/startup.sh</span><br></pre></td></tr></table></figure>
-<p>重启系统，运行 <code>ps -ef|grep main</code>，main文件已经运行起来了。</p>
-<p>如果没运行，手动在非 <code>startup.sh</code> 目录运行一下该脚本，看是否报错了。</p>
-<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><ul>
-<li>项目的系统无力吐槽了，用的是CentOS release 6.9 (Final)，和我常用的ubuntu16差多了啊！</li>
-<li>go真的很好用，虽然从python 转过去一开始有一点不适应，但是很快就接受了它，原因有：直接可以编译成一个可执行文件，扩平台，官方库很好用，go自带的go线程也很好用！</li>
-<li>网上的资料雷同太多了，找了很久才找到解决方法！</li>
-</ul>
+<h2 id="github和gitlab生成密钥"><a href="#github和gitlab生成密钥" class="headerlink" title="github和gitlab生成密钥"></a>github和gitlab生成密钥</h2><ol>
+<li>打开Git Bash</li>
+<li>粘贴以下内容，然后将邮箱更改为自己的邮箱</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>会出现以下提示语</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>输入自定义的密钥名称，如果不输入则默认密钥名为<code>id_rsa</code>,为了管理方便，建议输入对应的 网站名_id_rsa.如github密钥为 github_id_rsa,gitlab密钥为 gitlab_id_rsa.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):[Press enter] (此处输入/c/Users/you/.ssh/github_id_rsa)</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>然后直接回车两次即可</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; Enter passphrase (empty <span class="keyword">for</span> no passphrase): [Type a passphrase]</span><br><span class="line">&gt; Enter same passphrase again: [Type passphrase again]</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>按照以上步骤分别生成两个ssh密钥对: <code>github_id_rsa</code> 、 <code>gitlab_id_rsa</code></li>
+</ol>
+<h2 id="管理密钥"><a href="#管理密钥" class="headerlink" title="管理密钥"></a>管理密钥</h2><ol>
+<li>进入.ssh目录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd ~/.ssh</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>新建一个 <code>config</code>文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># touch config</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>用vim 或者vscode编辑该文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host  Github.com</span><br><span class="line">    IdentityFile ~/.ssh/github_id_rsa</span><br><span class="line"></span><br><span class="line">Host  gitlab.com</span><br><span class="line">    IdentityFile ~/.ssh/gitlab_id_rsa</span><br></pre></td></tr></table></figure>
+<p>这样对完成了对多密钥的管理，也便于后续添加其他的密钥</p>
+<h2 id="添加密钥至github、gitlab中"><a href="#添加密钥至github、gitlab中" class="headerlink" title="添加密钥至github、gitlab中"></a>添加密钥至github、gitlab中</h2><p>在添加密钥界面添加即可。</p>
 
       
     </div>
@@ -418,7 +433,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+            <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          
+            <a href="/tags/ssh/" rel="tag"><i class="fa fa-tag"></i> ssh</a>
           
         </div>
       
@@ -431,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/27/Python读写protobuf和json/" rel="next" title="Python读写protobuf和json">
-                <i class="fa fa-chevron-left"></i> Python读写protobuf和json
+              <a href="/2019/02/27/Centos6.9开机自启动脚本探究/" rel="next" title="Centos6.9 开机自启动脚本">
+                <i class="fa fa-chevron-left"></i> Centos6.9 开机自启动脚本
               </a>
             
           </div>
@@ -441,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/20/ssh多密钥管理/" rel="prev" title="ssh多密钥管理">
-                ssh多密钥管理 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/23/gitlab迁移至docker并版本升级/" rel="prev" title="gitlab迁移至docker并版本升级">
+                gitlab迁移至docker并版本升级 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -604,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查找资料"><span class="nav-number">1.</span> <span class="nav-text">查找资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路方案"><span class="nav-number">2.</span> <span class="nav-text">思路方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案：修改-etc-rc-d-rc-local"><span class="nav-number">3.</span> <span class="nav-text">解决方案：修改/etc/rc.d/rc.local</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感受"><span class="nav-number">4.</span> <span class="nav-text">感受</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github和gitlab生成密钥"><span class="nav-number">1.</span> <span class="nav-text">github和gitlab生成密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理密钥"><span class="nav-number">2.</span> <span class="nav-text">管理密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加密钥至github、gitlab中"><span class="nav-number">3.</span> <span class="nav-text">添加密钥至github、gitlab中</span></a></li></ol></div>
             
 
           </div>
@@ -776,9 +793,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/02/27/Centos6.9开机自启动脚本探究/';
-          this.page.identifier = '2019/02/27/Centos6.9开机自启动脚本探究/';
-          this.page.title = 'Centos6.9 开机自启动脚本';
+          this.page.url = 'http://yoursite.com/2019/05/20/ssh多密钥管理/';
+          this.page.identifier = '2019/05/20/ssh多密钥管理/';
+          this.page.title = 'ssh多密钥管理';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://kaifangs-blog.disqus.com/embed.js';
