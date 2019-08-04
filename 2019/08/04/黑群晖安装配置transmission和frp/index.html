@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 2px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="黑群晖,transmission,pt,docker,frp," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近花了300多买了一个星际蜗牛，拼拼凑凑了四块硬盘加上去了，并且安装了黑群晖，准备用来挂pt。群晖自带的download station 不是很好用，挂pt没有上传速度，因此手动安装transmission去下载。">
+<meta name="keywords" content="黑群晖,transmission,pt,docker,frp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黑群晖安装配置transmission和frp">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/黑群晖安装配置transmission和frp/index.html">
+<meta property="og:site_name" content="Hack-Fang的博客">
+<meta property="og:description" content="最近花了300多买了一个星际蜗牛，拼拼凑凑了四块硬盘加上去了，并且安装了黑群晖，准备用来挂pt。群晖自带的download station 不是很好用，挂pt没有上传速度，因此手动安装transmission去下载。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/BleKpkoahifqUrs.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d43fecb7121560436.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d44006f72e5253530.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d4403d97ea6877137.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d440540c6b8736449.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d44061b6547833515.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d440dc12c17959680.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d440e2feebdb33745.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d440f724359464778.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d441137b95e417287.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d441243e256a90265.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d44185b36e5d64409.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d4418b8a165653256.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d4418a9687e585693.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d4418a56231e54253.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/02/5d44191a8754627089.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/yuMZjE8B4kFQVwb.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/CnGcRgpsAvi9Iwu.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/MF47htHoUDYOTCu.png">
+<meta property="og:updated_time" content="2019-08-04T05:18:41.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="黑群晖安装配置transmission和frp">
+<meta name="twitter:description" content="最近花了300多买了一个星际蜗牛，拼拼凑凑了四块硬盘加上去了，并且安装了黑群晖，准备用来挂pt。群晖自带的download station 不是很好用，挂pt没有上传速度，因此手动安装transmission去下载。">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/04/BleKpkoahifqUrs.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/04/黑群晖安装配置transmission和frp/"/>
+
+
+
+
+
+  <title>黑群晖安装配置transmission和frp | Hack-Fang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hack-Fang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/黑群晖安装配置transmission和frp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KaiFang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hack-Fang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">黑群晖安装配置transmission和frp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-04T13:11:00+08:00">
+                2019-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/动手实战/" itemprop="url" rel="index">
+                    <span itemprop="name">动手实战</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/04/黑群晖安装配置transmission和frp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/08/04/黑群晖安装配置transmission和frp/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p><img src="https://i.loli.net/2019/08/04/BleKpkoahifqUrs.png" alt=""></p>
+<blockquote>
+<p>最近花了300多买了一个星际蜗牛，拼拼凑凑了四块硬盘加上去了，并且安装了黑群晖，准备用来挂pt。群晖自带的download station 不是很好用，挂pt没有上传速度，因此手动安装transmission去下载。<br><a id="more"></a></p>
+</blockquote>
+<h2 id="用黑群晖-docker-安装-transmission"><a href="#用黑群晖-docker-安装-transmission" class="headerlink" title="用黑群晖 docker 安装 transmission"></a>用黑群晖 docker 安装 transmission</h2><p>不得不说群晖的docker可视化操作做的确实不错，适合docker新手去操作。</p>
+<h2 id="更换docker-hub镜像源"><a href="#更换docker-hub镜像源" class="headerlink" title="更换docker hub镜像源"></a>更换docker hub镜像源</h2><ul>
+<li><p>自带的镜像源太慢了，需要更换成国内的镜像，我采用的是中科大docker hub源 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://docker.mirrors.ustc.edu.cn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按照图中所示，依次选择 <strong><code>注册表</code></strong> -&gt; <strong><code>设置</code></strong> -&gt; <strong><code>编辑</code></strong> -&gt; 勾选 <strong><code>启用注册表镜像</code></strong> 和填入中科大的hub地址，<strong><code>确认</code></strong> 保存即可。</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2019/08/02/5d43fecb7121560436.png" alt=""></p>
+<h2 id="安装Transmission，并配置webUI"><a href="#安装Transmission，并配置webUI" class="headerlink" title="安装Transmission，并配置webUI"></a>安装Transmission，并配置webUI</h2><ul>
+<li>安装</li>
+</ul>
+<p>搜索框搜索 <code>linuxserver/transmission</code><br>右键 <strong>下载此映像</strong> 在弹出的框中选择 <code>latest</code> 确认后等待下载完成。<br><img src="https://i.loli.net/2019/08/02/5d44006f72e5253530.png" alt=""></p>
+<ul>
+<li>配置transmission</li>
+</ul>
+<ol>
+<li><p>选中下载好的transimission映像中点击 <strong>启动</strong> 进入配置页面<br><img src="https://i.loli.net/2019/08/02/5d4403d97ea6877137.png" alt=""></p>
+</li>
+<li><p>点击 <strong>高级设置</strong> 依次设置 <strong>卷</strong>、<strong>端口设置</strong>、<strong>环境</strong>。</p>
+</li>
+</ol>
+<ul>
+<li><p>勾选 <code>启用自动重新启动</code>选项<br><img src="https://i.loli.net/2019/08/02/5d440540c6b8736449.png" alt=""></p>
+</li>
+<li><p>在 <code>卷</code> 选项中，<code>添加文件夹</code> 和 <code>装载路径</code> 分别代表<code>本机的路径</code> 和 <code>docker 容器的路径</code>, 在docker的目录下，新建如下目录Transmission/config (存放transmission配置文件)、Transmission/webui。并选择一个大一点的盘选择其中的一个目录作为下载目录。如图<br><img src="https://i.loli.net/2019/08/02/5d44061b6547833515.png" alt=""><br><img src="https://i.loli.net/2019/08/02/5d440dc12c17959680.png" alt=""></p>
+</li>
+<li><p><code>端口设置</code> 选项中，容器端口 为 51413(transmission运行端口) 和 9091(web运行端口) 端口，不可以修改！需要设置成自定义的固定的本地端口为 51413 和 9091。<br><img src="https://i.loli.net/2019/08/02/5d440e2feebdb33745.png" alt=""></p>
+</li>
+<li><p><code>环境</code> 选项中，新增加一个 <code>TRANSMISSION_WEB_HOME</code> ，并将其值设置为 /webui 。这一步指定了transmission web ui 的目录,之后放入web ui文件即可实现web控制下载。原生的web ui太丑了，因此采用transmission-web-control<br><img src="https://i.loli.net/2019/08/02/5d440f724359464778.png" alt=""></p>
+</li>
+<li><p>由于指定了transmission web ui 的目录，我们需要下载  <a href="https://github.com/ronggang/transmission-web-control" target="_blank" rel="noopener">transmission-web-control
+</a>  的源码，解压后，只需将其src文件夹中的所有文件，打开 File station 复制到 /docker/Transmission/webui 目录下。容器启动后即完成了web的配置<br><img src="https://i.loli.net/2019/08/02/5d441137b95e417287.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li><p>点 应用 -&gt; 下一步 -&gt; 应用 完成容器的创建</p>
+</li>
+<li><p>最后验证一下，在浏览器中打开transmission web的访问地址 192.168.2.164:9091 (取决于 端口设置那一步设置的本地端口号),请将ip地址写成实际的ip<br><img src="https://i.loli.net/2019/08/02/5d441243e256a90265.png" alt=""></p>
+</li>
+<li><p>并且你可以随时停止容器，然后用file station 打开 /docker/Transmission/config 修改transimisson的配置文件 settings.json.</p>
+</li>
+</ul>
+<p>这里提供一份挂pt的配置文件，仅供参考<br>挂pt需要禁用 dht、lpd<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"alt-speed-down"</span>: <span class="number">50</span>,</span><br><span class="line">    <span class="attr">"alt-speed-enabled"</span>: <span class="literal">false</span>, </span><br><span class="line">    <span class="attr">"alt-speed-time-begin"</span>: <span class="number">540</span>,</span><br><span class="line">    <span class="attr">"alt-speed-time-day"</span>: <span class="number">127</span>,</span><br><span class="line">    <span class="attr">"alt-speed-time-enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"alt-speed-time-end"</span>: <span class="number">1020</span>,</span><br><span class="line">    <span class="attr">"alt-speed-up"</span>: <span class="number">50</span>,</span><br><span class="line">    <span class="attr">"bind-address-ipv4"</span>: <span class="string">"0.0.0.0"</span>, </span><br><span class="line">    <span class="attr">"bind-address-ipv6"</span>: <span class="string">"::"</span>,</span><br><span class="line">    <span class="attr">"blocklist-enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"blocklist-url"</span>: <span class="string">"http://www.example.com/blocklist"</span>,</span><br><span class="line">    <span class="attr">"cache-size-mb"</span>: <span class="number">4</span>,</span><br><span class="line">    "dht-enabled": false, //挂pt禁用</span><br><span class="line">    "download-dir": "/downloads/complete",</span><br><span class="line">    "download-queue-enabled": true,</span><br><span class="line">    "download-queue-size": 5,</span><br><span class="line">    "encryption": 1,</span><br><span class="line">    "idle-seeding-limit": 30,</span><br><span class="line">    "idle-seeding-limit-enabled": false,</span><br><span class="line">    "incomplete-dir": "/downloads/incomplete",</span><br><span class="line">    "incomplete-dir-enabled": false,</span><br><span class="line">    "lpd-enabled": false, //挂pt禁用</span><br><span class="line">    "message-level": 1,</span><br><span class="line">    "peer-congestion-algorithm": "",</span><br><span class="line">    "peer-id-ttl-hours": 6,</span><br><span class="line">    "peer-limit-global": 200,</span><br><span class="line">    "peer-limit-per-torrent": 50,</span><br><span class="line">    "peer-port": 51413,</span><br><span class="line">    "peer-port-random-high": 65535,</span><br><span class="line">    "peer-port-random-low": 49152,</span><br><span class="line">    "peer-port-random-on-start": false,</span><br><span class="line">    "peer-socket-tos": "default",</span><br><span class="line">    "pex-enabled": false, //挂pt禁用</span><br><span class="line">    "port-forwarding-enabled": true,</span><br><span class="line">    "preallocation": 1,</span><br><span class="line">    "prefetch-enabled": 1,</span><br><span class="line">    "queue-stalled-enabled": true,</span><br><span class="line">    "queue-stalled-minutes": 30,</span><br><span class="line">    "ratio-limit": 2,</span><br><span class="line">    "ratio-limit-enabled": false,</span><br><span class="line">    "rename-partial-files": true,</span><br><span class="line">    "rpc-authentication-required": false,</span><br><span class="line">    "rpc-bind-address": "0.0.0.0",</span><br><span class="line">    "rpc-enabled": true,</span><br><span class="line">    "rpc-host-whitelist": "",</span><br><span class="line">    "rpc-host-whitelist-enabled": true,</span><br><span class="line">    "rpc-password": "123",</span><br><span class="line">    "rpc-port": 9091,</span><br><span class="line">    "rpc-url": "/transmission/",</span><br><span class="line">    "rpc-username": "flk",</span><br><span class="line">    "rpc-whitelist": "127.0.0.1",</span><br><span class="line">    "rpc-whitelist-enabled": false, //禁用白名单</span><br><span class="line">    "scrape-paused-torrents-enabled": true,</span><br><span class="line">    "script-torrent-done-enabled": false,</span><br><span class="line">    "script-torrent-done-filename": "",</span><br><span class="line">    "seed-queue-enabled": false,</span><br><span class="line">    "seed-queue-size": 10,</span><br><span class="line">    "speed-limit-down": 100,</span><br><span class="line">    "speed-limit-down-enabled": false,</span><br><span class="line">    "speed-limit-up": 100,</span><br><span class="line">    "speed-limit-up-enabled": false,</span><br><span class="line">    "start-added-torrents": true,</span><br><span class="line">    "trash-original-torrent-files": false,</span><br><span class="line">    "umask": 18,</span><br><span class="line">    "upload-slots-per-torrent": 14,</span><br><span class="line">    "utp-enabled": true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="PT-plus-助手-使用"><a href="#PT-plus-助手-使用" class="headerlink" title="PT plus 助手 使用"></a>PT plus 助手 使用</h2><p>pt plus 助手很方便管理多个pt资源和实现一键远程下载。以下为配置教程</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>根据你的浏览器 安装 <a href="https://addons.mozilla.org/zh-CN/firefox/addon/pt-plugin-plus/" target="_blank" rel="noopener">firefox版本</a> 和 <a href="https://chrome.google.com/webstore/detail/pt-plugin-plus/abkdiiddckphbigmakaojlnmakpllenb" target="_blank" rel="noopener">chrome版本</a>的扩展</p>
+<p>安装好后进行配置</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li>下载服务器配置</li>
+</ol>
+<ul>
+<li><code>新增</code> -&gt; <code>选择服务器类型</code> ，我选择的是Transimission，根据实际情况添加 -&gt; 点 <code>下一步</code> 根据提示填写 <code>服务器地址</code> 、<code>登录名</code> 、<code>登录密码</code> ，启用 <code>发送种子时自动开始下载</code> 点击 <code>测试服务器是否可连接</code>。没有问题则添加成功，不成功请检查上述是否填写正确。<br><img src="https://i.loli.net/2019/08/02/5d44185b36e5d64409.png" alt=""></li>
+</ul>
+<ol start="2">
+<li>常规设置<br><img src="https://i.loli.net/2019/08/02/5d4418b8a165653256.png" alt=""><br><img src="https://i.loli.net/2019/08/02/5d4418a9687e585693.png" alt=""><br><img src="https://i.loli.net/2019/08/02/5d4418a56231e54253.png" alt=""></li>
+</ol>
+<ol start="3">
+<li><p>站点设置<br>选择一键导入站点或者手动添加均可<br><img src="https://i.loli.net/2019/08/02/5d44191a8754627089.png" alt=""></p>
+</li>
+<li><p>打开pt站，会在右侧出现透明悬浮框，根据需要点击相应功能。<br><img src="https://i.loli.net/2019/08/04/yuMZjE8B4kFQVwb.png" alt=""></p>
+</li>
+</ol>
+<h2 id="frp-内网穿透"><a href="#frp-内网穿透" class="headerlink" title="frp 内网穿透"></a>frp 内网穿透</h2><p>利用frp和服务器实现外网访问，过程很简单，服务端安装完frp之后</p>
+<p>服务器配置文件frps.ini如下<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">8000</span> # 设置服务器绑定的ip</span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">token</span> = <span class="number">123456</span>   # 为了保证安全设置的通信token</span><br></pre></td></tr></table></figure></p>
+<h3 id="windows-自启动脚本"><a href="#windows-自启动脚本" class="headerlink" title="windows 自启动脚本"></a>windows 自启动脚本</h3><p>原理是将运行脚本放在windows的自启动文件夹下即可。</p>
+<ul>
+<li><p>自启动文件夹 ：C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</p>
+</li>
+<li><p>运行脚本内容</p>
+</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>" == "h" <span class="keyword">goto</span> begin</span><br><span class="line">mshta vbscript:createobject("wscript.shell").run("""%~nx0"" h",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:begin</span><br><span class="line"><span class="comment">REM</span></span><br><span class="line"><span class="built_in">cd</span> C:\SoftWare\frp</span><br><span class="line">frps -c frps.ini</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+<h3 id="群晖frp客户端自启动设置"><a href="#群晖frp客户端自启动设置" class="headerlink" title="群晖frp客户端自启动设置"></a>群晖frp客户端自启动设置</h3><p>安装过程不重复说明，利用ssh进入终端，进入 /usr/local/ 目录，新建一个 frpc 文件夹，git clone 下载frp，将其内容放到frpc里面，并修改里面的frpc.ini配置文件</p>
+<p>客户端配置文件如下<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">server_addr</span> = x.x.x.x # 服务器地址</span><br><span class="line"><span class="attr">server_port</span> = <span class="number">8000</span>    # 服务器端口</span><br><span class="line"><span class="attr">token</span> = <span class="number">123456</span>      # token</span><br><span class="line"></span><br><span class="line"><span class="section">[ssh]</span>  <span class="comment"># ssh</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">22</span>    # ssh端口</span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">2222</span> # 自定义外网端口</span><br><span class="line"></span><br><span class="line"><span class="section">[web]</span> </span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span> # 群晖后台默认端口</span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">5000</span> # 自定义外网端口</span><br><span class="line"></span><br><span class="line"><span class="section">[smb]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">445</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">5001</span></span><br></pre></td></tr></table></figure></p>
+<p>任务计划中 新增一个脚本<br><img src="https://i.loli.net/2019/08/04/CnGcRgpsAvi9Iwu.png" alt=""><br>任务设置中填入/usr/local/frpc/frpc -c /usr/local/frpc/frpc.ini。保存并运行该任务即可<br><img src="https://i.loli.net/2019/08/04/MF47htHoUDYOTCu.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/黑群晖/" rel="tag"><i class="fa fa-tag"></i> 黑群晖</a>
+          
+            <a href="/tags/transmission/" rel="tag"><i class="fa fa-tag"></i> transmission</a>
+          
+            <a href="/tags/pt/" rel="tag"><i class="fa fa-tag"></i> pt</a>
+          
+            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+          
+            <a href="/tags/frp/" rel="tag"><i class="fa fa-tag"></i> frp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/23/gitlab迁移至docker并版本升级/" rel="next" title="gitlab迁移至docker并版本升级">
+                <i class="fa fa-chevron-left"></i> gitlab迁移至docker并版本升级
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">KaiFang</p>
+              <p class="site-description motion-element" itemprop="description">hello world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hack-fang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135394248-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135394248-1');
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用黑群晖-docker-安装-transmission"><span class="nav-number">1.</span> <span class="nav-text">用黑群晖 docker 安装 transmission</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换docker-hub镜像源"><span class="nav-number">2.</span> <span class="nav-text">更换docker hub镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Transmission，并配置webUI"><span class="nav-number">3.</span> <span class="nav-text">安装Transmission，并配置webUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PT-plus-助手-使用"><span class="nav-number">4.</span> <span class="nav-text">PT plus 助手 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">4.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">4.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frp-内网穿透"><span class="nav-number">5.</span> <span class="nav-text">frp 内网穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-自启动脚本"><span class="nav-number">5.1.</span> <span class="nav-text">windows 自启动脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群晖frp客户端自启动设置"><span class="nav-number">5.2.</span> <span class="nav-text">群晖frp客户端自启动设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaiFang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://kaifangs-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/08/04/黑群晖安装配置transmission和frp/';
+          this.page.identifier = '2019/08/04/黑群晖安装配置transmission和frp/';
+          this.page.title = '黑群晖安装配置transmission和frp';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://kaifangs-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
